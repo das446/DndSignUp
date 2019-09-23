@@ -1,0 +1,16 @@
+#description {
+    width: 40%;
+    border: 1px solid;
+    top: 5%;
+    right: 10%;
+    position: absolute;
+    height: 90%;
+}
+
+#Name {
+    text-align: center;
+}
+
+#DM {
+    text-align: center;
+}
