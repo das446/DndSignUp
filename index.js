@@ -122,18 +122,8 @@ function SetCheckBoxes() {
     var lis = $('.campaign_id');
     lis.hover(function(evt) {
         var box = $(this);
-        if (box.prop("checked")) {
-            checked++;
-        } else {
-            checked--;
-        }
-        if (checked > 2) {
-            lastChecked.prop("checked", false);
-            checked = 2;
-        }
-        lastChecked = box;
 
-        var campaign = campaigns[box.attr('index')];
+        var campaign = campaigns[box.parent().attr('index')];
 
         $("#DM").text(campaign.dm);
         $("#Name").text(campaign.name);
