@@ -30,7 +30,8 @@ function SetCampaigns() {
             campaign.time = data[0];
             campaign.name = data[1];
             campaign.dm = data[2];
-            campaign.description = data[3];
+            campaign.img = data[3];
+            campaign.description = data[4];
             campaigns.push(campaign);
 
         }
@@ -79,6 +80,7 @@ function SetCheckBoxes() {
         $("#DM").text(campaign.dm);
         $("#Name").text(campaign.name);
         $("#summary").text(campaign.description);
+        $("#logo").attr("src", "Images/" + campaign.img);
 
 
     });

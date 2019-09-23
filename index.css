@@ -7,6 +7,11 @@
     height: 90%;
 }
 
+#logo {
+    max-width: 100%;
+    align-content: center;
+}
+
 #Name {
     text-align: center;
 }
