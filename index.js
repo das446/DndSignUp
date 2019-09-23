@@ -137,7 +137,7 @@ function SetCheckBoxes() {
 
         $("#DM").text(campaign.dm);
         $("#Name").text(campaign.name);
-        $("#summary").text(campaign.description);
+        $("#summary").html(campaign.description);
         $("#logo").attr("src", "Images/" + campaign.img);
 
 
