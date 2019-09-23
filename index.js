@@ -120,7 +120,7 @@ function SetCampaigns() {
 function SetCheckBoxes() {
 
     var lis = $('.campaign');
-    lis.click(function(evt) {
+    lis.hover(function(evt) {
         var box = $(this);
         if (box.prop("checked")) {
             checked++;
