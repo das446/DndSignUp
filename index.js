@@ -44,11 +44,11 @@ function SetCampaigns() {
             var id = c.name + " @" + c.time;
             //<li><input type="checkbox" class="campaign" id="kamal" name="campaign" value="kamal">Kamal's Kewl Kampaign</li>
             var li = $('<li></li>')
-            var check = $('<input type="checkbox" class="campaign" id="kamal" name="campaign" value="kamal">');
-            check.attr('id', id);
-            check.attr('value', id);
-            check.attr('index', i);
-            li.html(id).prepend(check);
+            var div = $('<div class="campaign" id="kamal" name="campaign" value="kamal">' + id + '</div>');
+            div.attr('id', id);
+            div.attr('value', id);
+            div.attr('index', i);
+            li.append(div);
             list.append(li);
         }
     }
@@ -59,8 +59,8 @@ function SetCampaigns() {
 
 function SetCheckBoxes() {
 
-    var boxes = $('.campaign');
-    boxes.on('change', function(evt) {
+    var lis = $('.campaign');
+    lis.click(function(evt) {
         var box = $(this);
         console.log(box.attr('id'));
         if (box.prop("checked")) {
