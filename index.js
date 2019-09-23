@@ -1,26 +1,69 @@
 var limit = 2;
 var checked = 0;
 var lastChecked;
+var responses = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSq-VvSWdFfxXMpv3Un9wPzYN9pVlycVJOK1P8zUeaGvs-rTE0iyBTB8_SXsQnzg0eeekgTBIEctBMZ/pub?output=csv";
 
 
 var campaigns = [];
 
+var csv;
+
 function SetCampaigns() {
+
 
     $.ajax({
         type: "GET",
-        url: "AGO_One-Shot_Saturday.csv",
+        url: responses,
         dataType: "text",
-        success: function(data) {
-            processData(data);
-            MakeCheckBoxes();
-            SetCheckBoxes();
+        success: function (data) {
+            csv = Papa.parse(data);
+            $.ajax({
+                type: "GET",
+                url: "AGO_One-Shot_Saturday.csv",
+                dataType: "text",
+                success: function (data) {
+                    processData(data, csv);
+                    MakeCheckBoxes();
+                    SetCheckBoxes();
+                }
+            });
         }
     });
 
-    function processData(allText) {
-        allText = allText.replace("");
-        var allTextLines = allText.split("!!");
+
+
+
+    function ParseGoogleForm(csv) {
+        var indexes = [];
+
+        var header = csv.data[0];
+
+        for (var i = 0; i < header.length; i++) {
+            var cell = header[i];
+            if (cell.includes("[") && cell.includes("]")) {
+                var sub = cell.substring(
+                    cell.lastIndexOf("[") + 1,
+                    cell.lastIndexOf("]")
+                );
+                indexes.push({
+                    name: sub,
+                    col: i
+                })
+            }
+        }
+
+        return indexes;
+    }
+
+
+
+
+    function processData(csv, form) {
+
+        var indexes = ParseGoogleForm(form);
+
+        csv = csv.replace("");
+        var allTextLines = csv.split("!!");
         var headers = allTextLines[0].split('|');
 
         for (var i = 1; i < allTextLines.length - 1; i++) {
@@ -31,11 +74,27 @@ function SetCampaigns() {
             campaign.name = data[1];
             campaign.dm = data[2];
             campaign.img = data[3];
+            campaign.cur = GetCurAmnt(indexes, i - 1, form);
+            campaign.max = 5
             campaign.description = data[4];
             campaigns.push(campaign);
 
         }
-        console.log(campaigns);
+    }
+
+    function GetCurAmnt(indexes, i, csv) {
+        var amnt = 0;
+        var n = indexes[i].col;
+        for (var j = 1; j < csv.data.length; j++) {
+            var cell = csv.data[j][n];
+            if (cell == "1") {
+                amnt++;
+                if (amnt > 5) {
+                    amnt = 5;
+                }
+            }
+        }
+        return amnt;
     }
 
     function MakeCheckBoxes() {
@@ -45,7 +104,7 @@ function SetCampaigns() {
             var id = c.name + " @" + c.time;
             //<li><input type="checkbox" class="campaign" id="kamal" name="campaign" value="kamal">Kamal's Kewl Kampaign</li>
             var li = $('<li></li>')
-            var div = $('<div class="campaign" id="kamal" name="campaign" value="kamal">' + id + '</div>');
+            var div = $('<div class="campaign" id="kamal" name="campaign" value="kamal">' + id + " " + c.cur + "/" + c.max + '</div>');
             div.attr('id', id);
             div.attr('value', id);
             div.attr('index', i);
@@ -61,9 +120,8 @@ function SetCampaigns() {
 function SetCheckBoxes() {
 
     var lis = $('.campaign');
-    lis.click(function(evt) {
+    lis.click(function (evt) {
         var box = $(this);
-        console.log(box.attr('id'));
         if (box.prop("checked")) {
             checked++;
         } else {
