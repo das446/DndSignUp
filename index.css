@@ -6,6 +6,11 @@
     height: 90%;
 }
 
+.campaign:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
 #logo {
     max-width: 100%;
     align-content: center;
