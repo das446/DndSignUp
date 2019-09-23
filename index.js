@@ -10,18 +10,18 @@ var csv;
 
 function SetCampaigns() {
 
-
+    var proxyurl = "https://cors-anywhere.herokuapp.com/";
     $.ajax({
         type: "GET",
-        url: responses,
+        url: proxyurl + responses,
         dataType: "text",
-        success: function (data) {
+        success: function(data) {
             csv = Papa.parse(data);
             $.ajax({
                 type: "GET",
                 url: "AGO_One-Shot_Saturday.csv",
                 dataType: "text",
-                success: function (data) {
+                success: function(data) {
                     processData(data, csv);
                     MakeCheckBoxes();
                     SetCheckBoxes();
@@ -120,7 +120,7 @@ function SetCampaigns() {
 function SetCheckBoxes() {
 
     var lis = $('.campaign');
-    lis.click(function (evt) {
+    lis.click(function(evt) {
         var box = $(this);
         if (box.prop("checked")) {
             checked++;
