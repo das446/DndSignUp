@@ -6,6 +6,18 @@
     height: 90%;
 }
 
+#campaigns {
+    width: fit-content;
+}
+
+.campaign {
+    font-size: 16px;
+}
+
+.campaign_id {
+    width: fit-content;
+}
+
 .campaign_id:hover {
     color: blue;
     text-decoration: underline;
