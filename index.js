@@ -104,7 +104,7 @@ function SetCampaigns() {
             var id = c.name + " @" + c.time;
             //<li><input type="checkbox" class="campaign" id="kamal" name="campaign" value="kamal">Kamal's Kewl Kampaign</li>
             var li = $('<li></li>')
-            var div = $('<div class="campaign" id="kamal"><div class = "campaign_id">' + c.name + '</div><div id="campaign_time"> @ ' + c.time + " " + c.cur + "/" + c.max + '</div></div>');
+            var div = $('<div class="campaign" id="kamal"><div class = "campaign_id">' + c.name + '</div><div id="campaign_time"> @ ' + c.time + " " + c.cur + "/" + c.max + ' spots filled</div></div>');
             div.attr('id', id);
             div.attr('value', id);
             div.attr('index', i);
@@ -129,7 +129,6 @@ function SetCheckBoxes() {
         $("#Name").text(campaign.name);
         $("#summary").html(campaign.description);
         $("#logo").attr("src", "Images/" + campaign.img);
-
 
     });
 };
