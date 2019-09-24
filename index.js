@@ -125,7 +125,7 @@ function SetCheckBoxes() {
 
         var campaign = campaigns[box.parent().attr('index')];
 
-        $("#DM").text(campaign.dm);
+        $("#DM").text("DMed by: " + campaign.dm);
         $("#Name").text(campaign.name);
         $("#summary").html(campaign.description);
         $("#logo").attr("src", "Images/" + campaign.img);
