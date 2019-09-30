@@ -19,7 +19,7 @@ function SetCampaigns() {
             csv = Papa.parse(data);
             $.ajax({
                 type: "GET",
-                url: "AGO_One-Shot_Saturday.csv",
+                url: "AGO_One-Shot_Saturday.csv?v=n",
                 dataType: "text",
                 success: function(data) {
                     processData(data, csv);
