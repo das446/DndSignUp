@@ -113,6 +113,7 @@ function SetCampaigns() {
         }
     }
 
+
 }
 
 
@@ -130,6 +131,5 @@ function SetCheckBoxes() {
         $("#logo").attr("src", "Images/" + campaign.img);
 
     });
-
-    $("#loading").remove()
+	$("#loading").remove();
 };
