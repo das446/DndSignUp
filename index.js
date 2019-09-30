@@ -113,9 +113,6 @@ function SetCampaigns() {
         }
     }
 
-setTimeout(function(){ $("#loading").remove()},1000);
-
-
 }
 
 
@@ -133,4 +130,6 @@ function SetCheckBoxes() {
         $("#logo").attr("src", "Images/" + campaign.img);
 
     });
+
+    $("#loading").remove()
 };
